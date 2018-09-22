@@ -6,7 +6,7 @@ const keys = require('../config/keys')
 module.exports.login = async function(req,res){
     //    Проверка существования пользователя
     const email = req.body.email
-    const candidate = await Users.findOne({email: req.body.email})
+    const candidate = await Users.findOne({firstName: req.body.firstName, lastName: req.body.lastName,email: req.body.email})
     if (candidate)
     {
         //Проверка пароля, пользователь существует
@@ -14,6 +14,8 @@ module.exports.login = async function(req,res){
         if (passwordResult){
             //Генерируем Token, пароли совпали
             const token = jwt.sign({
+                firstName: candidate.firstName,
+                lastName: candidate.lastName,
                 email: candidate.email,
                 userId: candidate._id
             }, keys.jwt, {expiresIn: 60*60})
@@ -39,7 +41,7 @@ module.exports.login = async function(req,res){
 
 }
 
-module.exports.register = async function(req,res,next){
+module.exports.register = async function(req,res){
     // //email & password
     // const user = new Users({
     //     email: req.body.email,
@@ -59,6 +61,8 @@ module.exports.register = async function(req,res,next){
         const salt =bcrypt.genSaltSync(10)
         const password = req.body.password
         const user = new Users ({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             email: req.body.email,
             password: bcrypt.hashSync(password, salt)
         })
