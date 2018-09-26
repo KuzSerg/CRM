@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Users = require('../models/User')
 const keys = require('../config/keys')
-
+const errorHandler = require('../utils/errorHandler')
 module.exports.login = async function(req,res){
     //    Проверка существования пользователя
     const email = req.body.email
@@ -67,13 +67,13 @@ module.exports.register = async function(req,res){
             password: bcrypt.hashSync(password, salt)
         })
         try {
-            //    сохраняем данные асинхронно
+            //сохраняем данные асинхронно
             await user.save()
             res.status(201).json(user)
         }
         catch (e) {
-            //    ловим ошибку
-
+            // ловим ошибку
+            errorHandler(res,e)
         }
     }
 }

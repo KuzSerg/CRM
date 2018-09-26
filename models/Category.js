@@ -1,4 +1,4 @@
-const mongoose = required('mongoose')
+const mongoose = require('mongoose')
 //Создаем схему описывающую нашу модель
 const Schema = mongoose.Schema
 
