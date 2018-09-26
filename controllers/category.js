@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Category = require('../models/Category');
 const errorHandler = require('../utils/errorHandler');
 const position = require('../models/Position');
@@ -45,24 +44,3 @@ module.exports.update = function(req, res) {
 		errorHandler(res, e);
 	}
 };
-=======
-module.exports.getAll = function(req,res){
-
-}
-
-module.exports.getById = function(req,res){
-
-}
-
-module.exports.remove = function(req,res){
-
-}
-
-module.exports.create = function(req,res){
-
-}
-
-module.exports.update = function(req,res){
-
-}
->>>>>>> parent of bb5f87c... First Commit Fullstack CRM
