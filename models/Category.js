@@ -28,4 +28,4 @@ const categorySchema = new Schema({
 
 //Экспорт модели:
 //Создаем нужную нам таблицу/коллекцию и передаем в нее созданную схему
-module.export = mongoose.model('categories', categorySchema);
+module.exports = mongoose.model('categories', categorySchema);

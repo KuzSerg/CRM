@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const Users = require('../models/User')
 const keys = require('../config/keys')
 const errorHandler = require('../utils/errorHandler')
+
 module.exports.login = async function(req,res){
     //    Проверка существования пользователя
     const email = req.body.email
@@ -73,7 +74,7 @@ module.exports.register = async function(req,res){
         }
         catch (e) {
             // ловим ошибку
-            errorHandler(res,e)
+            errorHandler(res, e)
         }
     }
 }

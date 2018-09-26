@@ -1,6 +1,7 @@
 //Подключаем плагины и модули
 const mongoose = require('mongoose')
 const express = require('express')
+const passport = require('passport')
 const bodyParser = require('body-parser')
 const authRoutes =  require('./routes/auth')
 const analyticsRoutes =  require('./routes/analytics')
@@ -15,10 +16,14 @@ mongoose.connect(keys.mongoURI)
     .then(() => console.log('MongoDB connected'))
     .catch(e => console.log(e))
 
+app.use(passport.initialize())
+require('./middleware/passport')(passport)
+
 app.use(morgan = require ('morgan')('dev'))
 //Обращаемся к объекту app
 //Вызов плагина bodyParser с методом JSON
 // для генерации из JSON -> JS объекты
+app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.json())
 
 //Обращаемся к объекту app
